@@ -10,14 +10,16 @@
 </head>
 
 <body>
+  <div>
+    ScalaJS Hello World
+  </div>
+
   <script type="text/javascript" src=
   "./target/scala-2.11/hellojs-fastopt.js">
 </script><script type="text/javascript">
         HelloApp().main();
   </script>
 
-  <div>
-    ScalaJS Hello World
-  </div>
+  <button id="click" type="button" onclick="HelloApp().addClickedMessage()">Click</button>
 </body>
 </html>
