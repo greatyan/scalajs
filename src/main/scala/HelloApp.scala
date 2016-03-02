@@ -2,22 +2,22 @@ import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
 import org.scalajs.dom
 import dom.document
+import org.scalajs.jquery.jQuery
+
 
 object HelloApp extends JSApp {
-  def main() : Unit = {
+  def main() {
     println("Hello World!")
-    appendPar(document.body, "Hello World");
+    jQuery( setupUI _)
   }
 
-  def appendPar(targetNode: dom.Node, text: String) {
-      val parNode = document.createElement("p");
-      val textNode = document.createTextNode(text);
-      parNode.appendChild( textNode);
-      targetNode.appendChild(parNode);
+  def setupUI() {
+    jQuery("body").append("<p>Hello World</p>")
+    jQuery("#button").click(addClickedMessage _)
   }
 
-  @JSExport
+
   def addClickedMessage() {
-    appendPar(document.body, "Clicked");
+    jQuery("body").append("<p>Clicked, jQueryV3</p>");
   }
 }
