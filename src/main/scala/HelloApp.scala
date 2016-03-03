@@ -13,6 +13,7 @@ object HelloApp extends JSApp {
 
   def setupUI() {
     jQuery("body").append("<p>Hello World</p>")
+    jQuery("body").append("<button id='button' type='button'>Click</button>")
     jQuery("#button").click(addClickedMessage _)
   }
 
