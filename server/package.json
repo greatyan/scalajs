@@ -7,8 +7,13 @@
     "grunt-contrib-nodeunit": "~0.4.1",
     "grunt-contrib-uglify": "~0.5.0"
   },
-  "engines": {"node": ">=0.10.0"},
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "description": "test nodejs project",
   "main": "target/index.js",
-  "author": "greatyan"
+  "author": "greatyan",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
