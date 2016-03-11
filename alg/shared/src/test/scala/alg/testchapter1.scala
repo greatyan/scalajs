@@ -78,3 +78,65 @@ class BinarySearchTest extends FlatSpec with Matchers
     search(3, values) should be (false) 
   }
 }
+
+class RationalTest extends FlatSpec with Matchers {
+
+  "gcd" should "return correct" in {
+    Rational.gcd(1,2) should be (1)
+    Rational.gcd(2,1) should be (1)
+    Rational.gcd(8,12) should be (4)
+    Rational.gcd(12,8) should be (4)
+  }
+
+  "A Rational" should "has toString()" in {
+    Rational(1,1).toString() should be ("1/1")
+    Rational(0,1).toString() should be ("0/1")
+  }
+
+  it should "normalize" in {
+    val r = Rational(8,12)
+    (r.numerator, r.denominator) should be ((2,3))
+
+    val r1 = Rational(-7, -7)
+    (r1.numerator, r1.denominator) should be ((1,1))
+
+    val r2 = Rational(-7, 7)
+    (r2.numerator, r2.denominator) should be ((-1,1))
+
+    val r3 = Rational(7, -7)
+    (r3.numerator, r3.denominator) should be ((-1,1))
+
+    val r4 = Rational(0, -7)
+    (r4.numerator, r4.denominator) should be ((0,1))
+
+    val r5 = Rational(0, 7)
+    (r5.numerator, r5.denominator) should be ((0,1))
+
+    an [IllegalArgumentException] should be thrownBy Rational(1,0)
+
+  }
+
+  it should "support +-*/" in {
+    Rational(1,2) + Rational(1,3) should be (Rational(5,6))
+    Rational(1,2) - Rational(1,3) should be (Rational(1,6))
+    Rational(1,2) * Rational(1,3) should be (Rational(1,6))
+    Rational(1,2) / Rational(1,3) should be (Rational(3,2))
+  }
+
+  it should "has implicit convertion from int" in {
+    Rational(1,2) + 1 should be (Rational(3,2))
+    1 + Rational(1,2) should be (Rational(3,2))
+  }
+
+  it should "throw exception for 0" in {
+    Rational(1,2) - Rational(0,1) should be (Rational(1,2))
+    Rational(1,2) + Rational(0,1) should be (Rational(1,2))
+    Rational(1,2) * Rational(0,1) should be (Rational(0,1))
+    an [IllegalArgumentException] should be thrownBy Rational(1,2) / Rational(0,1) 
+
+    Rational(0,1) - Rational(1,2) should be (Rational(-1,2))
+    Rational(0,1) + Rational(1,2) should be (Rational(1,2))
+    Rational(0,1) * Rational(1,2) should be (Rational(0,1))
+    Rational(0,1) / Rational(1,2) should be (Rational(0,1))
+  }
+}

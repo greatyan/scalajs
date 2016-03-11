@@ -62,3 +62,80 @@ object BinarySearch {
     }
   }
 }
+
+final class Rational(v1: Int, v2: Int) {
+
+  val (numerator:Int, denominator :Int) = {
+    import scala.math._
+    import Rational._
+
+    require( v2 != 0)
+    
+    if (v1 == 0) {
+      (0,1)
+    } else {
+      val (n, d) = if (v2 < 0) (-v1, -v2) else (v1, v2)
+      val g = gcd(abs(n), d)
+
+      (n/g, d/g)
+    }
+  }
+
+ 
+  def + (that : Rational) : Rational = {
+    Rational(
+      numerator * that.denominator + that.numerator * denominator,
+      denominator * that.denominator
+    )
+  }
+
+  def - (that : Rational) : Rational = {
+    Rational(
+      numerator * that.denominator - that.numerator * denominator,
+      denominator * that.denominator
+    )
+  }
+
+  def * (that : Rational) : Rational = {
+    Rational(
+      numerator * that.numerator,
+      denominator * that.denominator
+    )
+  }
+
+  def / (that : Rational) : Rational = {
+    Rational(
+      numerator * that.denominator,
+      denominator * that.numerator
+    )
+  }
+
+  override def equals ( that : Any) : Boolean = {
+    that match {
+      case t : Rational => numerator == t.numerator && denominator == t.denominator
+      case _ => false
+    }
+  }
+
+  override def hashCode() : Int =  {
+    31 * numerator + 33 * denominator
+  }
+
+  override def toString() = numerator + "/" + denominator
+}
+
+object Rational {
+
+  import scala.annotation.tailrec
+
+  def apply(numerator:Int) = new Rational( numerator, 1)
+  def apply(numerator:Int, denominator:Int) = new Rational(numerator, denominator)
+  implicit def intToRational( value:Int) = new Rational(value, 1)
+
+  @tailrec def gcd(v1:Int, v2:Int): Int = {
+    require(v1 > 0)
+    require(v2 >= 0)
+    if ( v2 == 0) v1 else gcd (v2, v1 % v2)
+  }
+
+}
