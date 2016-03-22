@@ -22,6 +22,12 @@ class Bag[T] extends Iterable[T] {
     sb.toString
   }
 
+  def add(v : T ) {
+    values += v
+  }
+
+  override def size = values.size
+  override def isEmpty = values.isEmpty
 }
 
 object Bag {
