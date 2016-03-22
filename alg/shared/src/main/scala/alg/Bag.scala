@@ -8,18 +8,7 @@ class Bag[T] extends Iterable[T] {
 
   def this(vs: T*) {
     this()
-    values.append(vs: _*)
-  }
-
-  override def iterator() : Iterator[T] = {
-    values.iterator
-  }
-
-  override def toString() = {
-    val sb = new StringBuilder("Bag(");
-    values.addString(sb, ",")
-    sb += ')'
-    sb.toString
+    values ++= vs
   }
 
   def add(v : T ) {
@@ -28,6 +17,7 @@ class Bag[T] extends Iterable[T] {
 
   override def size = values.size
   override def isEmpty = values.isEmpty
+  override def iterator = values.iterator 
 }
 
 object Bag {

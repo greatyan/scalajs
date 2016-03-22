@@ -7,7 +7,7 @@ class BagTest extends FlatSpec with Matchers
 {
     "A bag" should "has constructor" in {
       val bag = Bag(1,2,3)
-      bag.toString should be ("Bag(1,2,3)")
+      bag.toString should be ("Bag(1, 2, 3)")
     }
 
     it should "has API foreach" in {
@@ -21,7 +21,7 @@ class BagTest extends FlatSpec with Matchers
       val bag = new Bag[Int]()
       bag.add(1)
       bag.add(2)
-      bag.toString should be ("Bag(1,2)")
+      bag.toString should be ("Bag(1, 2)")
     }
 
     it should "has API isEmpty" in {

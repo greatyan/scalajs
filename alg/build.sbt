@@ -1,8 +1,6 @@
 
 name := "Algorithm Project"
 
-logLevel := Level.Debug
-
 lazy val root= (project in file(".")).
   aggregate(js, jvm).
   settings(
